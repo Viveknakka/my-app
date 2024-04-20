@@ -11,7 +11,7 @@ function App() {
  return(
   <>
   <Navbar/>
-  <TextForm/>
+  <TextForm heading="Enter the Text"/>
   </>
  );
 
