@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//import Alert from "./Alert";
 
 export default function TextForm(props) {
   const toupCase = () => {
@@ -13,9 +14,18 @@ export default function TextForm(props) {
     const newText = text.toLowerCase();
     setText(newText);
   };
+ 
   return (
     <>
-    <div>
+    
+    <div 
+    style = 
+    {
+        {
+           backgrounColor:(props.mode === "light")?"white":"black",
+           color:(props.mode === "light")?"black":"white"
+        }
+     }className="container">
       <h1>{props.heading}</h1>
       <textarea
         name=""
@@ -24,20 +34,30 @@ export default function TextForm(props) {
         rows="10"
         value={text}
         onChange={handleOnChange}
+        style={
+          {
+            backgroundColor:(props.mode === "light")?"white":"grey"
+            ,color:(props.mode === "light")?"black":"white"
+          }
+       }
       ></textarea>
       <br />
-      <button className="btn btn-primary m-2" onClick={toupCase}>
+      <button className="btn btn-primary my-2" onClick={()=>{toupCase();props.showAlert('converted to uppercase','danger');}}>
         Uppercase
       </button>
-      <button className="btn btn-primary m-2" onClick={tolowCase}>
+      <button className="btn btn-primary my-2" onClick={()=>{toupCase();props.showAlert('converted to lowercase','warning');}}>
         LowerCase
       </button>
-    </div>
+       </div>
     <div className="container">
       <h1>summary</h1>
       <p>NO.of char:{text.length}</p>
       <p>NO.of words:{text.split(" ").length}</p> 
       
+    </div>
+    <div className="container">
+      <h1>Preview</h1>
+       <p>{text.length>0?text:"Enter something to preview"}</p>
     </div>
     </>
   );

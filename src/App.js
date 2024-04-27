@@ -1,56 +1,62 @@
-//import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/textForm';
-/*function Temp(props){
-  return(
-    <h1 className='para'>How are {props.name}</h1>
-  );
-}*/
-function App() {
- return(
-  <>
-  <Navbar/>
-  <TextForm heading="Enter the Text"/>
-  </>
- );
+import Alert from './components/Alert';
+/*import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
- /*return (
-    <>
-    <Temp name="vivek"/>
-    <h1>Hellow</h1>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
-    <img src="dsfd" alt="imgee" />
-    <p className="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque tempore nam non fugiat. Eaque, dolorum optio. Repellendus consectetur, velit beatae quisquam pariatur accusamus, blanditiis autem iusto commodi nesciunt nulla aspernatur.</p>
-    </>
-  );*/
- /* return (
-    <>
-  
-     <h1>hello</h1>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React hello
-        </a>
-      </header>
-    </div>
-    </>
+import About from './components/About';
+import App1 from './App1';*/
+function App() {
+  const [mode, setMode] = useState('light');
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  };
+
+  const toggle = () => {
+    if (mode === 'light') {
+      setMode('dark');
+      document.body.style.backgroundColor = document.getElementById('color').value;
+      showAlert('Dark Mode enabled.', 'success');
+      document.title = 'TextUtil - Dark Mode';
+      setInterval(() => {
+        document.title = 'TextUtil is amazing...';
+      }, 2000);
+      setInterval(() => {
+        document.title = 'Install the TextUtil now...';
+      }, 1500);
+    } else {
+      setMode('light');
+      showAlert('Light Mode enabled.', 'success');
+      document.body.style.backgroundColor = document.getElementById('color').value;
+      document.title = 'TextUtil - Light Mode';
+    }
+  };
+return (
+  <>
+     <Navbar mode={mode} toggle={toggle} title="text" />
+        <Alert alert={alert} />
+        <TextForm heading="Enter the Text" mode={mode} toggle={toggle} alert={alert} showAlert={showAlert} />
+  </>
+);
+  /*
+  return (
+    <Router>
+      <div>
+        <Navbar mode={mode} toggle={toggle} title="text" />
+        <Alert alert={alert} />
+        <Routes>
+          <Route exact path="/about" element={<About/>}/>
+          <Route  path="/home" element={<TextForm heading="Enter the Text" mode={mode} toggle={toggle} alert={alert} showAlert={showAlert} />}/>
+          <Route exact path="/app1" element={<App1/>}></Route>
+        </Routes>                        
+        </div>
+    </Router>
   );*/
 }
 
